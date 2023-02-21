@@ -1,4 +1,5 @@
-// Problem 3, Moo Route: http://www.usaco.org/index.php?page=viewproblem2&cpid=1280
+// Problem 2, Following Directions
+// http://www.usaco.org/index.php?page=viewproblem2&cpid=1279
 
 #include <iostream>
 #include <vector>
