@@ -1,3 +1,5 @@
+// Problem 3, Moo Route: http://www.usaco.org/index.php?page=viewproblem2&cpid=1280
+
 #include <iostream>
 #include <vector>
 #include <cmath>
