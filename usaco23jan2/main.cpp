@@ -1,3 +1,5 @@
+// Problem 2, Lights Off: http://www.usaco.org/index.php?page=viewproblem2&cpid=1282
+
 #include <iostream>
 #include <vector>
 #include <cmath>
