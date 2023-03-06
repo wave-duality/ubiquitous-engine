@@ -10,9 +10,9 @@ using namespace std;
 
 #define ll long long
 
-long double dist(ll a, ll b, ll c, ll d){
+ll dist(ll a, ll b, ll c, ll d){
     //dist between (a,b) and (c,d)
-    return sqrt((a-c)*(a-c) + (b-d)*(b-d));
+    return ((a-c)*(a-c) + (b-d)*(b-d));
 }
 
 static bool comp(const vector<ll>& vec1, const vector<ll>& vec2) {
@@ -59,15 +59,15 @@ int main() {
                 res++;
             }
         } else if (lo == 0) {
-            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(graze.at(lo).at(2) - c)) {
+            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(graze.at(lo).at(2) - c)*abs(graze.at(lo).at(2) - c)) {
                 res++;
             } 
         } else if (lo == G-1 && c > graze.at(lo).at(2)) {
-            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(c - graze.at(lo).at(2))){
+            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(c - graze.at(lo).at(2))*abs(c - graze.at(lo).at(2))){
                 res++;
             }
         } else {
-            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(graze.at(lo).at(2) - c) || dist(a, b, graze.at(lo-1).at(0), graze.at(lo-1).at(1)) > abs(c - graze.at(lo-1).at(2)))  {
+            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(graze.at(lo).at(2) - c)*abs(graze.at(lo).at(2) - c) || dist(a, b, graze.at(lo-1).at(0), graze.at(lo-1).at(1)) > abs(c - graze.at(lo-1).at(2))*abs(c - graze.at(lo-1).at(2)))  {
                 res++;
             }
         }
