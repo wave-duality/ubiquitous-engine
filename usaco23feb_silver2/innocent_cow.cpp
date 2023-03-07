@@ -10,9 +10,10 @@ using namespace std;
 
 #define ll long long
 
-ll dist(ll a, ll b, ll c, ll d){
-    //dist between (a,b) and (c,d)
-    return ((a-c)*(a-c) + (b-d)*(b-d));
+bool unreachable(ll a, ll b, ll t, const vector<ll>& g) {
+    double dist = sqrt(pow(a - g[0], 2) + pow(b - g[1], 2));
+    double time = abs(t - g[2]);
+    return dist - time > std::numeric_limits<double>::epsilon();
 }
 
 static bool comp(const vector<ll>& vec1, const vector<ll>& vec2) {
@@ -59,17 +60,11 @@ int main() {
                 res++;
             }
         } else if (lo == 0) {
-            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(graze.at(lo).at(2) - c)*abs(graze.at(lo).at(2) - c)) {
-                res++;
-            } 
+            if (unreachable(a, b, c, graze[lo])) ++res;
         } else if (lo == G-1 && c > graze.at(lo).at(2)) {
-            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(c - graze.at(lo).at(2))*abs(c - graze.at(lo).at(2))){
-                res++;
-            }
+            if (unreachable(a, b, c, graze[lo])) ++res;
         } else {
-            if (dist(a, b, graze.at(lo).at(0), graze.at(lo).at(1)) > abs(graze.at(lo).at(2) - c)*abs(graze.at(lo).at(2) - c) || dist(a, b, graze.at(lo-1).at(0), graze.at(lo-1).at(1)) > abs(c - graze.at(lo-1).at(2))*abs(c - graze.at(lo-1).at(2)))  {
-                res++;
-            }
+            if (unreachable(a, b, c, graze[lo]) || unreachable(a, b, c, graze[lo-1])) ++res;
         }
         
     }
@@ -82,4 +77,4 @@ int main() {
             }
 */
 
-}
+}   
