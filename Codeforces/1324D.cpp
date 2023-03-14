@@ -11,8 +11,7 @@ using namespace std;
 
 
 int main() {
-    ll n; cin >> n; //topics
-    ll res = 0;
+    ll n; cin >> n; //topics   
     vector<int> teacher;
     vector<int> student;
     for (ll i = 0; i < n; i++) {
@@ -28,39 +27,22 @@ int main() {
         diff.push_back(teacher.at(p) - student.at(p));
     }
     sort(diff.begin(), diff.end());
-    int l = 0;
-    int r = n-1;
-    ll a = 1e9;
-    ll b = 1e9;
-    //a is the smallest index such that diff[>=a] >= 0
-    //b is the smallest index such that diff[>=b] >= 1
-    for (ll i = 0; i < n; i++) {
-        if (diff.at(i) >= 0) {
-            a = min(a, i);
-        } 
-        if (diff.at(i) >= 1) {
-            b = min(b, i);
-        }
-    }
 
-    //separate out the negative terms to prevent l and r crossing
-    if (b == 1e9) {
-        cout << 0 << "\n";
-    } else {
-        ll k = (n-b)*(n-b-1)/2;
-        ll m = (b-a)*(n-b);
-        res += k; //pairs within all-positive
-        res += m; //pairs of (0, positive)
-        while (l < a) {
-            while (r >= 1 && diff.at(l) + diff.at(r) >= 1) {
-                r--;
-            }
-            res += (n-r-1);
-            if (diff.at(l) + diff.at(r) >= 1) {
-                res++;
-            }
-            l++;
+    ll res = 0;
+
+    ll num_pos = std::count_if(diff.begin(), diff.end(), [&](int v){return v > 0;});
+    ll num_zeros = std::count(diff.begin(), diff.end(), 0);
+    res += num_pos*(num_pos-1)/2;
+    res += num_pos*num_zeros;
+
+    int l = 0, r = n-1;
+    while (l <= r && diff[l] < 0) {  // till left is no longer negative
+        while (l < r && diff[r] > 0 && diff[l]+diff[r] > 0) {
+            --r;
         }
-        cout << res << "\n";
+        res += n-r-1;
+
+        ++l;
     }
+    std::cout << res << std::endl;
 }
