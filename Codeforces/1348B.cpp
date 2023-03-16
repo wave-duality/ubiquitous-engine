@@ -11,18 +11,17 @@ using namespace std;
 
 void solve() {
     int n, k; cin >> n >> k;
-    int a[n];
+    
+    int num;
     vector<int> b;
-    int diff = 0;
     //different amount of integers so far
     for (int i = 0; i < n; i++) {
-        cin >> a[i];
-        if (count(b.begin(), b.end(), a[i]) == 0) {
-            diff++;
-            b.push_back(a[i]);
+        cin >> num;
+        if (count(b.begin(), b.end(), num) == 0) {
+            b.push_back(num);
         }
     }
-    if (diff > k) {
+    if (b.size() > k) {
         cout << "-1" << "\n";
     } else {
         //just take the distinct elements of a and repeat them n times
@@ -32,10 +31,11 @@ void solve() {
             b.push_back(1);
         }
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < b.size(); j++) {
-                cout << b.at(j) << " ";
+            for (const auto x : b) {
+                cout << x << " ";
             }
         }
+        cout << endl;
     }
     //can we make the array beautiful?
     
