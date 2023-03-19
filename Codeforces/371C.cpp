@@ -16,19 +16,20 @@ int main() {
     ll a, b, c; cin >> a >> b >> c; //curr stock
     ll x, y, z; cin >> x >> y >> z; //prices
     ll money; cin >> money;
-    for (int i = 0; i < recipe.length(); i++) {
-        if (recipe.at(i) == 'B') {
+    for (const auto t : recipe) {
+        if (t == 'B') {
             p++;
-        } else if (recipe.at(i) == 'S') {
+        } else if (t == 'S') {
             q++;
         } else {
             r++;
         }
     }
+
     ll lo = 0;
     ll hi = 1e13;
-    while (lo != hi) {
-        ll mid = ceil((lo+hi)/2.0); 
+    while (lo < hi) {
+        ll mid = (lo+hi+1)/2; 
         ll zero = 0;
         if (max((mid*p-a)*x, zero) + max((mid*q-b)*y, zero) + max((mid*r-c)*z, zero) <= money) {
             lo = mid;
